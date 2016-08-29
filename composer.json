@@ -1,4 +1,20 @@
 {
-    "name":"mcmraak/ion",
-    "version":"1.0.0"
+    "name": "component/ion",
+    "description": "Laravel AJAX helper",
+    "type": "component",
+    "homepage": "http://mraak.ru",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aleksandr Ablizin",
+            "email": "mcmraak@gmail.com"
+        }
+    ],
+    "extra": {
+        "component": {
+            "scripts": [
+                "ion.js"
+            ]
+        }
+    }
 }
