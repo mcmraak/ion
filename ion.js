@@ -7,9 +7,57 @@
 function Ion(){
     this.preloaderSelector;
     this.preloaderStartInterval = 700;
+    this.uploadFile();
 }
 
 Ion.prototype = {
+    uploadFile: function ()
+    {
+        var $this = this;
+        $(document).on('change', 'input[type=file]', function(event){
+            
+            event.stopPropagation();
+            event.preventDefault();
+            var myfiles = this.files;
+            
+            var data = new FormData();
+            
+            $.each( myfiles, function( key, value ){
+                data.append( key, value );
+            });
+            
+            var thisAjax = $(this).attr('ajax');
+            var thisAnswer =  $(this).attr('answer');
+            
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: thisAjax,
+                cache: false,
+                beforeSend: function ()
+                {
+                    $this.preloaderShow();
+                },
+                data: data,
+                processData: false,
+                contentType: false,
+                error: function (x)
+                {
+                    console.log(x);
+                    $('html').html(x.responseText);
+                },
+                success: function (html)
+                {
+                   if(thisAnswer){
+                       $(thisAnswer).html(html);
+                   }
+                   $this.preloaderHide();
+                }
+            });
+        });
+    },
     /* for ReplaceAll */
     escapeRegExp: function (str)
     {
@@ -30,7 +78,7 @@ Ion.prototype = {
     {
         var selector = this.preloaderSelector;
         if(!selector){
-            selector = '#Preloader';
+            this.preloaderSelector = selector = '#Preloader';
         }
         var si = this.preloaderStartInterval;
         $(selector).attr("complite", "false");
@@ -38,6 +86,7 @@ Ion.prototype = {
         {
             if ($(selector).attr("complite") === "false") {
                 $(selector).fadeIn(300);
+                $('body').css('cursor','wait');
             }
         }, si);
     },
@@ -46,6 +95,7 @@ Ion.prototype = {
     {
         $(this.preloaderSelector).attr("complite", "true");
         $(this.preloaderSelector).hide();
+        $('body').css('cursor','default');
     },
     /* Parse command from ajax attribute */
     parseAttr: function (attr, ac)
@@ -140,7 +190,6 @@ Ion.prototype = {
                 beforeSend: function ()
                 {
                     $this.preloaderShow();
-                    $('body').css('cursor','wait');
                 },
                 data: send,
                 error: function (x)
@@ -151,7 +200,6 @@ Ion.prototype = {
                 success: function (html)
                 {
                     $this.preloaderHide();
-                    $('body').css('cursor','default');
                     if (htmldata) {
                         $(htmldata).html(html);
                     }
