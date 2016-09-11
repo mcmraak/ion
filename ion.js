@@ -1,7 +1,8 @@
 /* 
- * version 0.1.2
+ * version 1.0.1
  * ion.js - MicroFramework-helper for ajax (with jQuery)
- * https://docs.google.com/document/d/1cW2wAi8Qk266QySXL2B9TVLiKiN9RkIFHAFRTqfNDt4/edit?usp=sharing
+ * docs: http://goo.gl/VppTLZ
+ * source: https://raw.githubusercontent.com/mcmraak/ion/master/ion.js
  */
 
 function Ion(){
@@ -43,9 +44,8 @@ Ion.prototype = {
                 data: data,
                 processData: false,
                 contentType: false,
-                error: function (x)
+                error: function(x)
                 {
-                    console.log(x);
                     $('html').html(x.responseText);
                 },
                 success: function (html)
@@ -148,7 +148,6 @@ Ion.prototype = {
         var prependto = this.parseAttr('prepend', ac);
         var val = this.parseAttr('val', ac);
         var run = this.parseAttr('run', ac);
-        var script = this.parseAttr('script', ac);
         var modal = this.parseAttr('modal', ac);
         var debug = this.parseAttr('debug', ac);
         var type = this.parseAttr('type', ac);
@@ -228,14 +227,8 @@ Ion.prototype = {
             }
         }
         
-        /* Run function */
         if(run){
-            if (typeof run === "function") {
-                eval(run);
-            }
-        }
-        if(script){
-            eval(script);
+            eval(run);
         }
         
         if(clean){
@@ -247,6 +240,7 @@ Ion.prototype = {
                 location.reload();
             }, reload*1000);
         }
+        
         if(modal === 'hide'){
             $('.modal').modal('hide');
         }
