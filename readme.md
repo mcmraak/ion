@@ -1,4 +1,5 @@
 # ion.js - Simple ajax-wrapper for Laravel
+Version: 1.0.1
 
 ## Требования
 
