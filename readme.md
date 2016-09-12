@@ -53,11 +53,7 @@ val='myvar':'AZAZA','myvar2':123;
 
 **RUN** - Запуск объявленной функции
 run=myfunc();
-Функция myfunc() запустится если она была объявлена ранее
-
-**SCRIPT** - Запуск javascript кода
-script=alert('Hallo!');
-Запуск произвольных функций
+Функция myfunc() запустится если она была объявлена ранее.
 
 **MODAL** - Открывает модальное окно twitter bootstrap
 modal=#MyModal;
