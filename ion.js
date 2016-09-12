@@ -121,7 +121,7 @@ Ion.prototype = {
             } else {
                 
                 if(obj.attr('value') === undefined){
-                    data[name] = obj.text();
+                    data[name] = obj.html();
                 } else {
                     data[name] = obj.attr('value');
                 }
