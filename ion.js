@@ -1,5 +1,5 @@
 /* 
- * version 1.0.1
+ * version 1.0.2
  * ion.js - MicroFramework-helper for ajax (with jQuery)
  * docs: http://goo.gl/VppTLZ
  * source: https://raw.githubusercontent.com/mcmraak/ion/master/ion.js
@@ -121,7 +121,7 @@ Ion.prototype = {
             } else {
                 
                 if(obj.attr('value') === undefined){
-                    data[name] = obj.html();
+                    data[name] = obj.text();
                 } else {
                     data[name] = obj.attr('value');
                 }
@@ -153,6 +153,7 @@ Ion.prototype = {
         var type = this.parseAttr('type', ac);
         var clean = this.parseAttr('clean', ac);
         var reload = this.parseAttr('reload', ac);
+        var get = this.parseAttr('get', ac);
         
         if(!type) {
             type = 'post';
@@ -177,7 +178,10 @@ Ion.prototype = {
             send = val;
         }
 
-        if (ajax) {
+        if (ajax) {         
+            if(get){
+                ajax += location.search;
+            }
             var $this = this;
             $.ajax({
                 headers: {
