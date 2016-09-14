@@ -1,3 +1,5 @@
+![ion.js](https://mcmraak.github.io/images/ionjs.png)
+
 # ion.js - Simple ajax-wrapper for Laravel
 Version: 1.0.1
 
