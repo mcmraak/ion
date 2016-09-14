@@ -28,8 +28,8 @@ myscript.js
 var ion = new Ion();
 ion.preloaderSelector = '#Preloader';
 
-$(document).on('mousedown', '[do]', function (){
-    ion.cmd($(this).attr('do'));
+$(document).on('mousedown', '[ion]', function (){
+    ion.cmd($(this).attr('ion'));
 });
 ```
 Где: #Preloader - Это селектор элемента который появляется если AJAX-запрос будет выполнятся более 0.7 секунды, 
