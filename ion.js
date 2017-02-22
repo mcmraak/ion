@@ -109,7 +109,7 @@ Ion.prototype = {
     /* Patse data from inputs and textblocks by entering the css selector */
     dataParse: function (selector)
     {
-        var inputs = $(selector).size();
+        var inputs = $(selector).length;
         var data = {};
         for (var i = 0; i < inputs; i++)
         {
